@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Appointment Centers - Wafid Booking</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+
+/* ================= ROOT ================= */
+:root{
+    --dark:#1a1a1a;
+    --grey:#2d2d2d;
+    --light:#f5f5f5;
+    --accent:#8B0000;
+}
+
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI;
+}
+
+body{
+    background:#000;
+    color:#fff;
+}
+
+/* ================= BACKGROUND ================= */
+.bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('bg.jpg') no-repeat center center/cover;
+    z-index:-1;
+    filter:brightness(0.55);
+}
+
+@media(max-width:768px){
+    .bg{
+        background-position:right center;
+        background-size:cover;
+    }
+}
+
+/* ================= TOPBAR ================= */
+.topbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:70px;
+    background:var(--grey);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    z-index:1000;
+    box-shadow:0 5px 20px rgba(0,0,0,0.6);
+}
+
+.topbar img{
+    height:45px;
+    object-fit:contain;
+}
+
+.hamburger{
+    width:30px;
+    cursor:pointer;
+}
+
+.hamburger span{
+    display:block;
+    height:4px;
+    margin:5px 0;
+    background:#fff;
+    border-radius:5px;
+}
+
+/* ================= SIDE MENU ================= */
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:280px;
+    height:100%;
+    background:#111;
+    padding:70px 20px;
+    transition:0.4s;
+    z-index:2000;
+}
+
+.side-menu.active{
+    right:0;
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:24px;
+    color:#fff;
+    cursor:pointer;
+}
+
+.side-menu a{
+    display:block;
+    padding:12px;
+    color:#ddd;
+    text-decoration:none;
+    border-bottom:1px solid #222;
+}
+
+.side-menu a:hover{
+    background:#8B0000;
+    color:#fff;
+}
+
+.contact-box{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid #333;
+    color:#aaa;
+}
+
+.contact-box h3{
+    color:#fff;
+    margin-bottom:10px;
+}
+
+/* ================= HERO ================= */
+.hero{
+    padding-top:120px;
+    text-align:center;
+    padding-bottom:50px;
+}
+
+.hero h1{
+    font-size:2.8rem;
+}
+
+.hero p{
+    opacity:0.85;
+    margin-top:10px;
+}
+
+/* ================= CARDS ================= */
+.section{
+    padding:60px 20px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+    justify-items:center;
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+@media(min-width:769px){
+    .section{
+        grid-template-columns:repeat(2,minmax(250px,1fr));
+        justify-items:stretch;
+    }
+    .section .card:nth-child(3){
+        grid-column:1 / -1;
+        justify-self:center;
+        max-width:720px;
+    }
+}
+
+.card{
+    width:100%;
+    background:#111;
+    color:#fff;
+    padding:30px;
+    border-radius:15px;
+    text-align:left;
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card::after{
+    content:'';
+    display:table;
+    clear:both;
+}
+
+.card button{
+    pointer-events:none;
+}
+
+.card button{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    background:var(--grey);
+    color:#fff;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.icon-circle{
+    width:50px;
+    height:50px;
+    background:#8B0000;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    float:left;
+    margin:0 20px 15px 0;
+    font-size:20px;
+    box-shadow:0 10px 25px rgba(139,0,0,0.4);
+    transition:0.3s;
+}
+
+.card:hover .icon-circle{
+    transform:scale(1.1);
+    background:#a52a2a;
+}
+
+.section-title{
+    color:#fff;
+    font-size:1.8rem;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.map-btn{
+    background:#f0f0f0;
+    color:#000;
+    border:2px solid #333;
+    padding:12px 30px;
+    border-radius:25px;
+    font-size:1.1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+}
+
+.map-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.note-section{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.12);
+    color:#fff;
+    padding:2rem;
+    border-radius:15px;
+    text-align:center;
+    margin:3rem 0;
+}
+
+.whatsapp-support{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:#10b981;
+    color:white;
+    padding:12px 25px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:1rem;
+    transition:all 0.3s ease;
+}
+
+.whatsapp-support:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 25px rgba(16,185,129,0.4);
+}
+
+.disclaimer{
+    background:transparent;
+    border:none;
+    color:#fff;
+    padding:0.6rem 0;
+    font-size:0.95rem;
+    text-align:center;
+    max-width:700px;
+    margin:10px auto;
+    opacity:0.9;
+}
+
+.footer{
+    background:#111;
+    padding:50px 20px;
+    text-align:center;
+    margin-top:50px;
+}
+
+.footer img{
+    width:120px;
+    margin-bottom:20px;
+}
+
+.social{
+    margin:15px 0;
+}
+
+.social a{
+    color:#fff;
+    font-size:20px;
+    margin:0 10px;
+    transition:0.3s;
+}
+
+.social a:hover{
+    color:var(--accent);
+    transform:scale(1.2);
+}
+
+.footer p{
+    margin-top:10px;
+    color:#aaa;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+    .section{grid-template-columns:1fr;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="topbar">
+    <img src="logo.jpg" alt="logo">
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<div class="side-menu" id="menu">
+    <div class="close-btn" onclick="toggleMenu()">❮</div>
+    <a href="index.html">Home</a>
+    <a href="booking.html">Book Appointment</a>
+    <a href="results.html">Medical Results</a>
+    <a href="centers.html">Centers</a>
+    <div class="contact-box">
+        <h3>Contact Us</h3>
+        <p>📞 +923338181082</p>
+        <p>📧 gamcaoffice@gmail.com</p>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Medical Appointment Centers</h1>
+    <p>Visit our branches for quick and easy appointment booking assistance.</p>
+</div>
+
+<div class="section">
+    <div class="card">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>OFFICE 1</h3>
+        <p>Near NM Diagnostic centre, Gujranwala</p>
+        <a href="https://maps.app.goo.gl/9WUnMPao4esh6DT9A" class="map-btn" target="_blank"><i class="fas fa-map"></i> View on Map</a>
+    </div>
+    <div class="card">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>OFFICE 2</h3>
+        <p>Near Misbah Diagnostic centre, Gujranwala</p>
+        <a href="https://maps.app.goo.gl/2GPrEK6XChcW7uPu6" class="map-btn" target="_blank"><i class="fas fa-map"></i> View on Map</a>
+    </div>
+    <div class="card">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>OFFICE 3</h3>
+        <p>Near Royal Diagnostic centre, Gujranwala</p>
+        <a href="https://maps.app.goo.gl/9Y9kzg5ibQ5j1Hpg6" class="map-btn" target="_blank"><i class="fas fa-map"></i> View on Map</a>
+    </div>
+    <div class="card">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>OFFICE 4</h3>
+        <p>Near Care Pro Diagnostic centre Kings Mall, Gujranwala</p>
+        <a href="https://maps.app.goo.gl/4LgWCYHmXNDPptJo8" class="map-btn" target="_blank"><i class="fas fa-map"></i> View on Map</a>
+    </div>
+    <div class="card">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>OFFICE 5</h3>
+        <p>31-C Small industrial Estate near NAVTTC center, Gujranwala</p>
+        <a href="https://maps.app.goo.gl/M4PBpMRiMDvFXYfp9" class="map-btn" target="_blank"><i class="fas fa-map"></i> View on Map</a>
+    </div>
+    <div class="card">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>OFFICE 6</h3>
+        <p>Shaheenabad, Gujranwala</p>
+        <a href="https://maps.app.goo.gl/wAdAGy2nj6iNs1Fa8" class="map-btn" target="_blank"><i class="fas fa-map"></i> View on Map</a>
+    </div>
+</div>
+
+<div class="note-section">
+    <h3><i class="fas fa-info-circle"></i> For exact directions, click 'View on Map'</h3>
+    <p>Our centers are open 7 days a week with extended hours for your convenience.</p>
+    <a href="https://wa.me/923338181082" class="whatsapp-support" target="_blank"><i class="fab fa-whatsapp"></i> Get Directions via WhatsApp</a>
+</div>
+
+<div class="disclaimer">
+    <strong>Disclaimer:</strong> We are an independent service provider and not affiliated with Wafid or any official government authority.
+</div>
+
+<div class="footer">
+    <img src="logo2.jpg" alt="logo">
+    <div class="social">
+        <a href="https://youtube.com/@hameedphotostudio9298?si=LL2hMuDBJ9BK2yau" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/share/1ApuWfmQ8s/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/photohome92?igsh=MTJpOGVwdml5ODFxcg==" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>gemcaoffice@gmail.com</p>
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById('menu').classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

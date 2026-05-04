@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Wafid Appointment - Fast & Secure</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: black;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* HEADER */
+       .header {
+            background: #0f172a;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: #0f172a;
+            flex-direction: column;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            list-style: none;
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #e5e7eb;
+            font-weight: 500;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+        }
+
+        /* REST SAME (UNCHANGED) */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        .page-title {
+            text-align: center;
+            color: black;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: black;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: black;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #f9fafb;
+            color: black;
+        }
+
+        .packages-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .package-card {
+            background: white;
+            border: 3px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn-primary {
+            background: #f0f0f0;
+            border: 2px solid #333;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+        }
+
+        .footer {
+            background: white;
+            color: black;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .packages-section { grid-template-columns: 1fr; }
+            .action-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="index.html"><img src="logo.jpg" alt="Logo"></a>
+        </div>
+        <nav>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="booking.html" class="active">Book Appointment</a></li>
+                <li><a href="results.html">Medical Results</a></li>
+                <li><a href="centers.html">Appointment Centers</a></li>
+            </ul>
+        </nav>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-calendar-check"></i> Book Your Appointment
+        </h1>
+
+        <div class="success-message" id="successMessage">
+            Your appointment request has been prepared! You'll be redirected to WhatsApp.
+        </div>
+
+        <form id="bookingForm">
+            <!-- SECTION 1: APPOINTMENT INFO -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i> Appointment Information
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Select Country:</label>
+                        <select id="country" required>
+                            <option value="Pakistan" selected>Pakistan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Select City:</label>
+                        <select id="city" required>
+                            <option value="">Select City</option>
+                            <option value="Bahawalpur">Bahawalpur</option>
+                            <option value="Chakdara">Chakdara</option>
+                            <option value="Faisalabad">Faisalabad</option>
+                            <option value="Gujranwala">Gujranwala</option>
+                            <option value="Gwadar">Gwadar</option>
+                            <option value="Islamabad">Islamabad</option>
+                            <option value="Karachi">Karachi</option>
+                            <option value="Khuzdar">Khuzdar</option>
+                            <option value="Lahore">Lahore</option>
+                            <option value="Multan">Multan</option>
+                            <option value="Panjgur">Panjgur</option>
+                            <option value="Peshawar">Peshawar</option>
+                            <option value="Quetta">Quetta</option>
+                            <option value="Rawalpindi">Rawalpindi</option>
+                            <option value="Sahiwal">Sahiwal</option>
+                            <option value="Sialkot">Sialkot</option>
+                            <option value="Turbat">Turbat</option>
+                        </select>
+                        <div class="error-message" data-field="city"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Country Traveling To:</label>
+                        <select id="travelCountry" required>
+                            <option value="">Select Country</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Kuwait">Kuwait</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="UAE">UAE</option>
+                            <option value="Yemen">Yemen</option>
+                        </select>
+                        <div class="error-message" data-field="travelCountry"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: CANDIDATE INFORMATION -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i> Candidate Information
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+    <label>Upload Passport Photo</label>
+    <input type="file" id="passportPhoto" accept="image/*">
+</div>
+                    <div class="form-group">
+                        <label>First Name <span style="color: #ef4444;">*</span></label>
+                        <input type="text" id="firstName" required>
+                        <div class="error-message" data-field="firstName"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name <span style="color: #ef4444;">*</span></label>
+                        <input type="text" id="lastName" required>
+                        <div class="error-message" data-field="lastName"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dob">
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <select id="nationality">
+                            <option value="Pakistan" selected>Pakistan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Marital Status</label>
+                        <select id="maritalStatus">
+                            <option value="">Select Status</option>
+                            <option value="Married">Married</option>
+                            <option value="Unmarried">Unmarried</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Passport Number <span style="color: #ef4444;">*</span></label>
+                        <input type="text" id="passport" required>
+                        <div class="error-message" data-field="passport"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Passport Issue Date</label>
+                        <input type="date" id="passportIssue">
+                    </div>
+                    <div class="form-group">
+                        <label>Passport Issue Place</label>
+                        <input type="text" id="passportPlace">
+                    </div>
+                    <div class="form-group">
+                        <label>Passport Expiry Date</label>
+                        <input type="date" id="passportExpiry">
+                    </div>
+                    <div class="form-group">
+                        <label>Visa Type <span style="color: #ef4444;">*</span></label>
+                        <select id="visaType" required>
+                            <option value="">Select Visa Type</option>
+                            <option value="Family">Family</option>
+                            <option value="Study">Study</option>
+                            <option value="Visit">Visit</option>
+                            <option value="Work">Work</option>
+                        </select>
+                        <div class="error-message" data-field="visaType"></div>
+                    </div>
+                    <div class="form-group">
+    <label>Visa Applied For <span style="color:#ef4444;">*</span></label>
+   <select id="visaAppliedFor" required>
+    <option value="">Select Occupation</option>
+
+    <option value="Accountant">Accountant</option>
+    <option value="A.C Technician">A.C Technician</option>
+    <option value="Agricultural Worker">Agricultural Worker</option>
+    <option value="Aluminum Technician">Aluminum Technician</option>
+    <option value="Anesthesia Technician">Anesthesia Technician</option>
+    <option value="Arabic Food Cook">Arabic Food Cook</option>
+    <option value="Architect">Architect</option>
+    <option value="Auto-Cad Operator">Auto-Cad Operator</option>
+    <option value="Banking & Finance">Banking & Finance</option>
+    <option value="Barber">Barber</option>
+    <option value="Building Electrician">Building Electrician</option>
+    <option value="Business">Business</option>
+    <option value="Butcher">Butcher</option>
+    <option value="Cabin Appearance (Airlines)">Cabin Appearance (Airlines)</option>
+    <option value="Car Mechanic">Car Mechanic</option>
+    <option value="Car Washer">Car Washer</option>
+    <option value="Carpenter">Carpenter</option>
+    <option value="Cashier">Cashier</option>
+    <option value="Cleaner">Cleaner</option>
+    <option value="Clerk">Clerk</option>
+    <option value="Computer Operator">Computer Operator</option>
+    <option value="Construction Worker">Construction Worker</option>
+    <option value="Consultant">Consultant</option>
+    <option value="Draftsman">Draftsman</option>
+    <option value="Diesel Mechanic">Diesel Mechanic</option>
+    <option value="Doctor">Doctor</option>
+    <option value="Dozer Operator">Dozer Operator</option>
+    <option value="Driver">Driver</option>
+    <option value="Electrical Technician">Electrical Technician</option>
+    <option value="Electrician">Electrician</option>
+    <option value="Engineer">Engineer</option>
+    <option value="Employment">Employment</option>
+    <option value="Family">Family</option>
+    <option value="Financial Analyst">Financial Analyst</option>
+    <option value="Fuel Filler">Fuel Filler</option>
+    <option value="General Secretary">General Secretary</option>
+    <option value="Hairdresser">Hairdresser</option>
+    <option value="Hajj Duty">Hajj Duty</option>
+    <option value="Health & Medicine & Nursing">Health & Medicine & Nursing</option>
+    <option value="Heavy Driver">Heavy Driver</option>
+    <option value="Hospital Cleaning">Hospital Cleaning</option>
+    <option value="House Boy">House Boy</option>
+    <option value="House Driver">House Driver</option>
+    <option value="House Maid">House Maid</option>
+    <option value="House Wife">House Wife</option>
+    <option value="IT & Internet Engineer">IT & Internet Engineer</option>
+    <option value="Lab Technician">Lab Technician</option>
+    <option value="Labour">Labour</option>
+    <option value="Lecturer">Lecturer</option>
+    <option value="Leisure & Tourism">Leisure & Tourism</option>
+    <option value="Light Driver">Light Driver</option>
+    <option value="Mason">Mason</option>
+    <option value="Manager">Manager</option>
+    <option value="Marketing Executive">Marketing Executive</option>
+    <option value="Medical Specialist">Medical Specialist</option>
+    <option value="Mechanic">Mechanic</option>
+    <option value="Microbiologist">Microbiologist</option>
+    <option value="Nurse">Nurse</option>
+    <option value="Nursing Helper">Nursing Helper</option>
+    <option value="Office Secretary">Office Secretary</option>
+    <option value="Painter">Painter</option>
+    <option value="Petrol Mechanic">Petrol Mechanic</option>
+    <option value="Pharmacist">Pharmacist</option>
+    <option value="Plaster Mason">Plaster Mason</option>
+    <option value="Plumber">Plumber</option>
+    <option value="Police Officer">Police Officer</option>
+    <option value="President">President</option>
+    <option value="RCC Fitter">RCC Fitter</option>
+    <option value="Salesman">Salesman</option>
+    <option value="Security Guard">Security Guard</option>
+    <option value="Service">Service</option>
+    <option value="Servant">Servant</option>
+    <option value="Shepherd">Shepherd</option>
+    <option value="Shovel Operator">Shovel Operator</option>
+    <option value="Software Developer">Software Developer</option>
+    <option value="Steel Fixer">Steel Fixer</option>
+    <option value="Student">Student</option>
+    <option value="Studio CAD Designer">Studio CAD Designer</option>
+    <option value="Supervisor">Supervisor</option>
+    <option value="Surveyor">Surveyor</option>
+    <option value="Tailor">Tailor</option>
+    <option value="Teacher">Teacher</option>
+    <option value="Technician">Technician</option>
+    <option value="Waiter">Waiter</option>
+    <option value="Ward Boy">Ward Boy</option>
+    <option value="Welder">Welder</option>
+    <option value="Worker">Worker</option>
+    <option value="X-ray Technician">X-ray Technician</option>
+
+    <!-- ALWAYS LAST -->
+    <option value="Other">Other</option>
+</select>
+    <div class="error-message" data-field="visaAppliedFor"></div>
+</div>
+                    <div class="form-group">
+                        <label>National ID (CNIC)</label>
+                        <input type="text" id="cnic">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: PACKAGE SELECTION -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-gift"></i> Select Package
+                </h2>
+                <div class="packages-section">
+                    <div class="package-card" data-package="standard">
+                        <input type="radio" id="standard" name="package" value="standard" checked>
+                        <label for="standard">
+                            <h3>Standard Appointment</h3>
+                            <div class="package-price">Rs 4000</div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 15 min processing</li>
+                                <li><i class="fas fa-check"></i> Phone support</li>
+                                <li><i class="fas fa-check"></i> Trusted process</li>
+                            </ul>
+                        </label>
+                    </div>
+                    <div class="package-card" data-package="premium">
+                        <input type="radio" id="premium" name="package" value="premium">
+                        <label for="premium">
+                            <h3>Premium Appointment</h3>
+                            <div class="package-price">Rs 9999</div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> Priority booking</li>
+                                <li><i class="fas fa-check"></i> 3 working days processing</li>
+                                <li><i class="fas fa-check"></i> Guaranteed slot</li>
+                            </ul>
+                        </label>
+                    </div>
+                </div>
+            </div>
+ </div>
+ 
+ <!-- ================= PAYMENT SECTION ================= -->
+<div class="form-section" id="paymentSection">
+
+<h2 class="section-title">
+<i class="fas fa-credit-card"></i> Payment Details
+</h2>
+
+<div class="packages-section">
+
+<!-- JAZZCASH / EASYPAISA -->
+<div class="package-card selected" style="cursor:default;">
+    <h3>JazzCash </h3>
+    <img src="qr1.jpg" style="width:50%; border-radius:10px; margin:10px 0;">
+    <p><b>Number:</b> 03458181082</p>
+</div>
+<div class="package-card selected" style="cursor:default;">
+    <h3>Easypaisa</h3>
+    <img src="qr3.jpg" style="width:50%; border-radius:10px; margin:10px 0;">
+    <p><b>Number:</b> 03458181082</p>
+</div>
+<!-- BANK -->
+<div class="package-card" style="cursor:default;">
+    <h3>Bank Transfer</h3>
+    <img src="qr2.jpg" style="width:100%; border-radius:10px; margin:10px 0;">
+    <p><b>Bank:</b> Bank Of Punjab</p>
+    <p><b>Account:</b> 5010085253500018</p>
+    <p><b>IBAN:</b> PK48BPUN5010085253500018</p>
+</div>
+
+</div>
+
+<br>
+
+<h3>Payment Confirmation</h3>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Select Payment Method</label>
+<select id="paymentMethod" required>
+    <option value="">Select</option>
+    <option value="Bank Transfer">Bank Transfer</option>
+    <option value="JazzCash">JazzCash</option>
+    <option value="Easypaisa">Easypaisa</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Your Account / Mobile Number</label>
+<input type="text" id="customerAcc" placeholder="e.g 03XXXXXXXXX">
+</div>
+
+<div class="form-group">
+<label>Account Holder Name</label>
+<input type="text" id="senderName">
+</div>
+<div><p style="color:red;font-weight:bold;">
+After payment, please send screenshot on WhatsApp for verification.
+</p></div>
+</div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="action-buttons">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-primary" id="continueBtn">
+                     Continue
+                </button>
+            </div>
+        </form>
+   
+</div>
+<div class="form-section">
+
+<h3 style="color:#0f172a; font-weight:800;">
+When and How You Will Get the Medical Test Slip
+</h3>
+
+<p style="line-height:1.7;">
+After receiving your Registration fee, your medical test slip will be issued and sent to your Email or WhatsApp in PDF format within 15 minutes. Please keep patience....!
+</p>
+
+<p style="line-height:1.7;">
+Please note that on Saturdays and Sundays, the appointment slip might take a little longer. Thanks for your understanding!
+</p>
+
+<p style="direction:rtl; line-height:1.8;">
+رجسٹریشن فیس کی تصدیق ہونے کے بعد آپ کی میڈیکل ٹوکن سلپ جاری کر دی جائے گی اور پی ڈی ایف فائل میں آپ کے ای میل یا واٹس اپ پر بھیجی جائے گی۔ عمل کے دوران برائے کرم کم ازکم پندرہ منٹ انتظار کریں۔
+</p>
+
+<p style="direction:rtl; line-height:1.8;">
+براہ کرم نوٹ کریں کہ ہفتہ اور اتوار کو اپوائنٹمنٹ سلپ میں تھوڑا زیادہ وقت لگ سکتا ہے۔ آپ کے سمجھنے کا شکریہ!
+</p>
+
+</div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; padding: 2rem;">
+            <p>&copy; 2026 Medical Booking Service. All rights reserved.</p>
+           <div style="
+    background: transparent;
+    border: none;
+    color: #111;
+    font-size: 0.55rem;
+    margin-top: 1rem;
+    text-align: center;
+    opacity: 0.75;
+    line-height: 1.4;
+">
+ We are an independent service provider and not affiliated with Wafid or any official government authority.
+</div>
+        </div>
+    </footer>
+<script>
+   // =====================
+// MOBILE MENU
+// =====================
+function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('active');
+}
+
+// =====================
+// PACKAGE SELECTION
+// =====================
+document.querySelectorAll('.package-card').forEach(card => {
+    card.addEventListener('click', function () {
+        document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+
+        const radio = this.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+    });
+});
+
+// =====================
+// FORM SUBMIT - FIXED
+// =====================
+document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    clearErrors();
+
+    // Required fields
+    const required = ['firstName', 'lastName', 'city', 'travelCountry', 'passport'];
+    for (let id of required) {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+            showError(el, "Required field");
+            return;
+        }
+    }
+
+    const packageValue = document.querySelector('input[name="package"]:checked')?.value || 'standard';
+
+    const formData = {
+    name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
+    gender: document.getElementById('gender').value,
+    passport: document.getElementById('passport').value,
+    city: document.getElementById('city').value,
+    travelCountry: document.getElementById('travelCountry').value,
+    visaType: document.getElementById('visaType').value,
+    package: packageValue === 'premium' ? 'Premium' : 'Standard',
+    visaAppliedFor: document.getElementById('visaAppliedFor').value,
+    dob: document.getElementById('dob').value,
+    cnic: document.getElementById('cnic').value,
+    email: document.getElementById('email').value,
+
+    passportAppliedDate: document.getElementById('passportIssue').value,
+    passportExpiryDate: document.getElementById('passportExpiry').value,
+    passportIssuePlace: document.getElementById('passportPlace').value,
+    maritalStatus: document.getElementById('maritalStatus').value,
+
+    passportPhoto: document.getElementById('passportPhoto')?.files[0]
+      
+    ? document.getElementById('passportPhoto').files[0].name
+        : "Not Uploaded"
+};
+    const paymentMethod = document.getElementById('paymentMethod').value;
+    const customerAcc = document.getElementById('customerAcc').value;
+    const senderName = document.getElementById('senderName').value;
+
+    if(!paymentMethod || !customerAcc || !senderName){
+        alert("Please complete payment details");
+        return;
+    }
+
+    const message = `
+📅 Wafid Appointment Request
+
+👤 Name: ${formData.name}
+📍 City: ${formData.city}
+🚻 Gender: ${formData.gender || 'N/A'}
+🌍 Traveling To: ${formData.travelCountry}
+
+📄 Passport: ${formData.passport}
+🪪 CNIC: ${formData.cnic || 'N/A'}
+📧 Email: ${formData.email || 'N/A'}
+💼 Visa Applied For: ${formData.visaAppliedFor}
+💼 Visa Type: ${formData.visaType}
+🏷 Package: ${formData.package}
+
+🎂 DOB: ${formData.dob || 'N/A'}
+📆 Passport Issue Date: ${formData.passportAppliedDate || 'N/A'}
+📆 Passport Expiry: ${formData.passportExpiryDate || 'N/A'}
+📍 Issue Place: ${formData.passportIssuePlace || 'N/A'}
+💍 Marital Status: ${formData.maritalStatus || 'N/A'}
+
+📎 Passport Photo: ${formData.passportPhoto}
+
+💳 PAYMENT DETAILS
+Method: ${paymentMethod}
+Account/Mobile: ${customerAcc}
+Sender Name: ${senderName}
+
+🏦 PAYMENT INFO
+JazzCash/Easypaisa: 03458181082
+Bank: Bank Of Punjab
+Account: 5010085253500018
+IBAN: PK48BPUN5010085253500018
+
+⚠️ Important: Screenshot will be sent for verification.
+`;
+
+    const fullMessage = message;
+    const url = "https://wa.me/923338181082?text=" + encodeURIComponent(fullMessage);
+    
+    // Open WhatsApp chat in a new tab so the form page stays available
+    window.open(url, '_blank');
+});
+
+// =====================
+// ERROR HANDLING
+// =====================
+function showError(input, msg) {
+    input.style.border = "2px solid red";
+}
+
+function clearErrors() {
+    document.querySelectorAll('input, select').forEach(el => {
+        el.style.border = "";
+    });
+}
+</script>
+  </body>
+</html>
