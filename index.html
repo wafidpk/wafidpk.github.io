@@ -39,15 +39,17 @@ body{
     left:0;
     width:100%;
     height:100%;
-    background:url('bg.jpg') no-repeat center center/cover;
+    background:url('bb.jpg') no-repeat center center/cover;
     z-index:-1;
-    filter:brightness(0.6);
+    filter:brightness(0.7);
+     background-position:right bottom;
+     background-position:right bottom ;
 }
 
 /* Mobile focus adjustment (right side visible) */
 @media(max-width:768px){
     .bg{
-        background-position:right center;
+        background-position:right center bottom;
         background-size:cover;
     }
 }
@@ -65,19 +67,21 @@ body{
     top:0;
     width:100%;
     height:70px;
-    background:var(--grey);
+    background:rgb(48, 48, 48);
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 20px;
     z-index:1000;
-    box-shadow:0 5px 20px rgba(0,0,0,0.6);
+   
+   border-bottom: 1px solid rgba(255, 255, 255, 0.491);
 }
 
 /* LOGO */
 .topbar img{
-    height:45px;
+    height:60px;
     object-fit:contain;
+    filter: brightness(1.4);
 }
 
 /* HAMBURGER */
@@ -150,93 +154,138 @@ body{
 /* ================= HERO ================= */
 .hero{
     padding-top:120px;
-    text-align:center;
+    text-align:left;
+    font-style: normal;
+    margin-left:30px;
+    
+    
 }
 
 .hero h1{
-    font-size:2.5rem;
+    font-size:3.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+     margin-left: 30px;
 }
 
-.hero p{
-    opacity:0.8;
-    margin-top:10px;
+#mmmmm{
+    color: #a6a6a6;
+    margin-top:30px;
+    font-size: larger;
+    margin-left: 30px;
+    font-family: 'Roboto', sans-serif;
 }
+#mmm{
+ font-family: 'Roboto', sans-serif;
+ color: rgb(255, 255, 255);
+    align-self: center;
+    font-weight: bolder;
+    margin-top: 35px;
+    font-size: 1.3em;
+     margin-left: 30px;
+}
+
 
 /* ================= CARDS ================= */
 .section{
-    padding:60px 20px;
-    display:grid;
-    grid-template-columns:1fr;
-    gap:20px;
-    justify-items:center;
-    width:100%;
-    max-width:900px;
-    margin:0 auto;
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 card per row */
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-@media(min-width:769px){
+/* Laptop / Desktop */
+@media (min-width: 769px){
     .section{
-        grid-template-columns:repeat(2,minmax(250px,1fr));
-        justify-items:stretch;
-        gap:24px;
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+        gap: 30px;
     }
 }
 
 .card{
-    width:100%;
-    background:#fff;
-    color:#000;
-    padding:30px;
-    border-radius:15px;
-    text-align:left;
-    transition:0.3s;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    width: 100%;
+    min-height: 250px; /* Card ki overall height */
+    background: #fff;
+    color: #000;
+    padding: 30px;
+    border-radius: 5px;
+    text-align: left;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 20px 40px rgba(0,0,0,0.4);
-}
-.card::after{
-    content:'';
-    display:table;
-    clear:both;
-}
-.card button{
-    pointer-events:none;
-}
-.card button{
-    margin-top:15px;
-    padding:10px 20px;
-    border:none;
-    background:var(--grey);
-    color:#fff;
-    border-radius:20px;
-    cursor:pointer;
-    align-self:center;
-}
-.icon-circle{
-    width:50px;
-    height:50px;
-    background:#8B0000; /* maroon */
-    color:#fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    float:left;
-    margin:0 20px 15px 0;
-    font-size:20px;
-    box-shadow:0 10px 25px rgba(139,0,0,0.4);
-    transition:0.3s;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* hover effect */
+.card::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.card button{
+    pointer-events: none;
+    margin-top: 30px;
+    padding: 12px 20px;
+    border: none;
+    background: var(--grey);
+    color: #fff;
+    border-radius: 15px;
+    cursor: pointer;
+    width: fit-content;
+    min-width: 120px;
+    float: left;
+}
+
+.m{
+    font-size: 0.9em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.g{
+    font-family: "Open Sans", Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.3;
+    color: #909090;
+    letter-spacing: 0;
+    font-size: 1.1em;
+    margin-top: 30px;
+}
+
+.icon-circle{
+    width: 50px;
+    height: 50px;
+    background: rgb(109, 35, 74);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin: 0 10px 15px 0;
+    font-size: 23px;
+    transition: 0.3s;
+}
+
+.hh{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 450;
+    
+    font-size: 1.7em;
+    
+}
+
 .card:hover .icon-circle{
-    transform:scale(1.1);
-    background:#a52a2a;
+    transform: scale(1.1);
+    background: rgb(106, 33, 93);
 }
 /* ================= FOOTER ================= */
 .footer{
@@ -319,8 +368,8 @@ body{
 <!-- HERO -->
 <div class="hero">
     <h1>Wafid Medical Appointment Booking</h1>
-    <p>Fast, Secure & Hassle-Free Medical Appointments for Your Wafid Process</p>
-    <p>Trusted by Hundreds | Verified Centers | Quick Processing</p>
+    <p id="mmmmm">Fast, Secure & Hassle-Free Medical Appointments for Your Wafid Process</p>
+    <p id="mmm">Trusted by Hundreds | Verified Centers | Quick Processing</p>
 </div>
 
 <!-- CARDS -->
@@ -333,9 +382,9 @@ body{
         <i class="fas fa-calendar-check"></i>
     </div>
 
-    <h3>Book Appointment</h3>
-    <p>Book your Wafid medical appointment  easily.</p>
-    <button>Book Appointment</button>
+    <h3 class="hh">Book Appointment</h3>
+    <p class="g">Book your Wafid medical appointment  easily.</p>
+    <button class="m">Book Appointment</button>
 </div>
  <div class="card" onclick="location.href='https://wafid.com/en/search-slip/'">
 
@@ -343,9 +392,9 @@ body{
         <i class="fas fa-receipt"></i>
     </div>
 
-    <h3>View Appointment Slips </h3>
-    <p>Check your medical appointment slips in just one click.</p>
-    <button>View Appointment Slips</button>
+    <h3 class="hh">Medical Results</h3>
+    <p class="g">Check your medical appointment slips in just one click.</p>
+    <button class="m">View Appointment Slips</button>
 </div>
 
     <div class="card" onclick="location.href='https://wafid.com/en/medical-status-search/'">
@@ -354,9 +403,9 @@ body{
        <i class="fas fa-file-medical"></i>
     </div>
 
-    <h3>Medical Results</h3>
-    <p>Check your medical check-up reports instantly.</p>
-    <button>View Medical Results</button>
+    <h3 class="hh">Medical Results</h3>
+    <p class="g">Check your medical check-up reports instantly.</p>
+    <button class="m">View Medical Results</button>
 </div>
 
     <div class="card" onclick="location.href='centers.html'">
@@ -364,9 +413,9 @@ body{
         <i class="fas fa-map-marker-alt"></i>
     </div>
        
-        <h3>Medical Appointment Centers</h3>
-        <p>Find nearest medical centers.</p>
-        <button>Visit Centers</button>
+        <h3 class="hh">Medical Appointment Centers</h3>
+        <p class="g">Find nearest medical centers.</p>
+        <button class="m">Visit Centers</button>
     </div>
 
 </div>
